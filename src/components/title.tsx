@@ -1,11 +1,25 @@
 'use client'
 
-import { NextFont } from "next/dist/compiled/@next/font";
-import { useEffect, useState } from "react";
+import { UnifrakturMaguntia, Coming_Soon, Yarndings_12, Libre_Barcode_39_Extended_Text, Jacquard_12_Charted, Pixelify_Sans } from "next/font/google";
+import { useState, useEffect } from "react";
 
-export default function Title({fonts} : {fonts : NextFont[]}) {
+
+const unifraktur = UnifrakturMaguntia({ subsets: ["latin"], weight: ["400"] });
+const comingSoon = Coming_Soon({ subsets: ["latin"], weight: ["400"] });
+const yarndings = Yarndings_12({ subsets: ["latin"], weight: ["400"] });
+const libreBarcode = Libre_Barcode_39_Extended_Text({
+  subsets: ["latin"],
+  weight: ["400"],
+});
+const jaquard = Jacquard_12_Charted({ subsets: ["latin"], weight: ["400"] });
+const pixelify = Pixelify_Sans({ subsets: ["latin"], weight: ["400"] });
+
+export const fonts = [unifraktur, comingSoon, yarndings, libreBarcode, jaquard, pixelify]
+
+export default function Title() {
 
     const [currentFontIndex, setCurrentFontIndex] = useState(0);
+  
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -13,7 +27,7 @@ export default function Title({fonts} : {fonts : NextFont[]}) {
         }, 800); 
     
         return () => clearInterval(intervalId);
-      }, [fonts.length]);
+      }, [fonts]);
 
       const currentFont = fonts[currentFontIndex].className;
 

@@ -9,8 +9,7 @@ export default function Name() {
   const [name, setName] = useState("");
   const router = useRouter();
 
-  async function handleStart(event) {
-    event.preventDefault(); 
+  async function handleStart() {
     if (name.length < 3) {
       toast.error("(ง •̀_•́)ง Please enter a name with at least 3 characters.");
     } else {
