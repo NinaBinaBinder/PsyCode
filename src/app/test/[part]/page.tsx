@@ -16,7 +16,7 @@ export default async function PersonalityPart({
     .where(eq(questions.part, Number(part)));
 
   return (
-    <main className="flex flex-col bg-zinc-100 items-center justify-between p-24">
+    <main className="flex flex-col bg-black text-zinc-100 items-center justify-between p-24">
       <p className="text-2xl font-bold">{personalityPart[0].partTitle}</p>
 
       <div className="p-5 min-w-0.5">
@@ -36,7 +36,9 @@ export default async function PersonalityPart({
             </div>
           ))}
         </form>
-        <div className="flex justify-between my-4">
+        
+      </div>
+      <div className="flex justify-between w-5/6 my-4">
           <Link
             replace
             href={
@@ -60,7 +62,6 @@ export default async function PersonalityPart({
             next
           </Link>
         </div>
-      </div>
     </main>
   );
 }

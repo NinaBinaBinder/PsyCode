@@ -9,7 +9,9 @@ export default function Name() {
   const [name, setName] = useState("");
   const router = useRouter();
 
-  async function handleStart() {
+  async function handleStart(event: { preventDefault: () => void; }) {
+    event.preventDefault()
+
     if (name.length < 3) {
       toast.error("(ง •̀_•́)ง Please enter a name with at least 3 characters.");
     } else {
@@ -37,7 +39,7 @@ export default function Name() {
       />
       <button
         type="submit"
-        className="bg-black p-4 rounded-xl hover:bg-gray-900 font-bold text-white"
+        className="bg-zinc-800 p-4 rounded-xl hover:bg-zinc-500 font-bold text-white"
       >
         Start
       </button>
