@@ -53,7 +53,7 @@ export default function Title() {
   const currentFont = fonts[currentFontIndex].className;
 
   return (
-    <div className="flex flex-col items-center m-32 text-white text-6xl sm:text-8xl mt-20 ">
+    <div className="flex flex-col items-center text-white text-6xl sm:text-8xl ">
       <p className={currentFont}>PsyCode</p>
     </div>
   );
