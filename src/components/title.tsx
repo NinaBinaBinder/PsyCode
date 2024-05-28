@@ -17,24 +17,14 @@ const comingSoon = Coming_Soon({
   display: "swap",
   adjustFontFallback: false,
 });
-const yarndings = Yarndings_12({
-  subsets: ["latin"],
-  weight: ["400"],
-  display: "swap",
-  adjustFontFallback: false,
-});
+
 const libreBarcode = Libre_Barcode_39_Extended_Text({
   subsets: ["latin"],
   weight: ["400"],
   display: "swap",
   adjustFontFallback: false,
 });
-const jaquard = Jacquard_12_Charted({
-  subsets: ["latin"],
-  weight: ["400"],
-  display: "swap",
-  adjustFontFallback: false,
-});
+
 const pixelify = Pixelify_Sans({
   subsets: ["latin"],
   weight: ["400"],
@@ -45,9 +35,7 @@ const pixelify = Pixelify_Sans({
 export const fonts = [
   unifraktur,
   comingSoon,
-  yarndings,
   libreBarcode,
-  jaquard,
   pixelify,
 ];
 
