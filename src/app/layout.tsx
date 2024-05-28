@@ -1,8 +1,37 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import {
+  Coming_Soon,
+  Yarndings_12,
+  UnifrakturMaguntia,
+  Libre_Barcode_39_Extended_Text,
+  Jacquard_12_Charted,
+  Pixelify_Sans,
+} from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/footer";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
+const unifraktur = UnifrakturMaguntia({ subsets: ["latin"], weight: ["400"] });
+const comingSoon = Coming_Soon({ subsets: ["latin"], weight: ["400"] });
+const yarndings = Yarndings_12({ subsets: ["latin"], weight: ["400"] });
+const libreBarcode = Libre_Barcode_39_Extended_Text({
+  subsets: ["latin"],
+  weight: ["400"],
+});
+const jaquard = Jacquard_12_Charted({ subsets: ["latin"], weight: ["400"] });
+const pixelify = Pixelify_Sans({ subsets: ["latin"], weight: ["400"] });
+
+export const fonts = [
+  unifraktur,
+  comingSoon,
+  yarndings,
+  libreBarcode,
+  jaquard,
+  inter,
+  pixelify,
+];
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +45,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className="bg-gray-100">
+        <Toaster position="top-center" />
+        {children}
+      </body>
+      <Footer />
     </html>
   );
 }
