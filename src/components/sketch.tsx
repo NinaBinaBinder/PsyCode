@@ -34,7 +34,7 @@ export const sketch: Sketch = (p5) => {
   p5.draw = () => {
     p5.background(220, 1, 96);
     pulse += 0.005;
-    //drawShape(random, 0, 20, 100);
+    drawShape(random, 0, 20, 100);
   };
 
   return sketch;
