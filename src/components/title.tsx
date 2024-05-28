@@ -3,9 +3,7 @@
 import {
   UnifrakturMaguntia,
   Coming_Soon,
-  Yarndings_12,
   Libre_Barcode_39_Extended_Text,
-  Jacquard_12_Charted,
   Pixelify_Sans,
 } from "next/font/google";
 import { useState, useEffect } from "react";
