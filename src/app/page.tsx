@@ -1,5 +1,4 @@
 "use server";
-import P5Wrapper from "@/components/p5-wrapper";
 import Name from "@/components/name";
 import Title from "@/components/title";
 import QR from "@/components/qr";
@@ -14,11 +13,6 @@ export default async function Home() {
      <div className="lg:hidden m-20">
       <Name/>
      </div>
-     
-      <div className="absolute -z-10">
-        <P5Wrapper/>
-      </div>
-      
     </main>
   );
 }
