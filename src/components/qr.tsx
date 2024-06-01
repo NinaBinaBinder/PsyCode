@@ -4,7 +4,7 @@ import QRCode from 'qrcode.react';
 import React from 'react';
 
 const QR = () => {
-  const url = "https://psycode.vercel.app";
+  const url = "https://psy-code.vercel.app";
 
   return (
     <div className='flex flex-col items-center'>

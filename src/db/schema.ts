@@ -4,6 +4,7 @@ import {
   pgTable,
   serial,
   timestamp,
+  uuid,
   varchar,
 } from "drizzle-orm/pg-core";
 
@@ -15,25 +16,27 @@ export const surveyPartEnum = pgEnum("surveyPartEnum", [
   "Self and Security",
 ]);
 
-export type QuestionType = typeof questions.$inferSelect
+export type QuestionType = typeof questions.$inferSelect;
 
 export const questions = pgTable("questions", {
-  id: serial("id").primaryKey(),
+  id: uuid("id").defaultRandom().primaryKey(),
   question: varchar("question", { length: 255 }).notNull(),
   partTitle: surveyPartEnum("partTitle").notNull(),
   part: integer("part").notNull(),
 });
 
 export const personalities = pgTable("personalities", {
-  id: serial("id").primaryKey(),
+  id: uuid("id").defaultRandom().primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   dateAdded: timestamp("date").defaultNow(),
 });
 
+export type PersonType = typeof personalities.$inferSelect;
+
 export const answers = pgTable("answers", {
-  id: serial("id").primaryKey(),
-  personId: integer("person_id").references(() => personalities.id),
-  questionId: integer("question_id").references(() => questions.id),
+  id: uuid("id").defaultRandom().primaryKey(),
+  personId: uuid("person_id").references(() => personalities.id),
+  questionId: uuid("question_id").references(() => questions.id),
   responseValue: integer("response").notNull(),
   responseDate: timestamp("response_date").defaultNow(),
 });

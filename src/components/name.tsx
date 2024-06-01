@@ -19,7 +19,7 @@ export default function Name() {
         await addPerson({ name });
         toast.success(`Hello ${name} ~(‾▿‾)~`);
         setName("");
-        router.push("././test/1");
+        router.push(`././test/${await addPerson({name})}/1`);
       } catch (error) {
         console.error(error);
         toast.error("An error occurred while adding the name (╥﹏╥)");
