@@ -38,13 +38,11 @@ export default async function Person({
         </Link>
         <Link
           replace
-          href={{
-            pathname:
-              currentPart >= 5
-                ? `/${personId}/result`
-                : `/test/[personId]/${currentPart + 1}`,
-            query: { personId: personId },
-          }}
+          href={
+            currentPart >= 5
+              ? `/${personId}/result`
+              : `/test/${personId}/${currentPart + 1}`
+          }
           className="rounded-lg hover:bg-zinc-600 bg-zinc-800 p-2 px-5"
         >
           next

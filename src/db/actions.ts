@@ -1,13 +1,15 @@
 "use server";
 
-import { db } from "./connection";
-import { answers, personalities } from "./schema";
+import { db } from "@/db/connection";
+import { answers, personalities } from "@/db/schema";
 
 export async function addPerson({ name }: { name: string }) {
-  const person = await db.insert(personalities).values({ name }).returning({personId: personalities.id});
-  console.log('Added new person with ID: ', person[0].personId);
-  return person[0].personId
-
+  const person = await db
+    .insert(personalities)
+    .values({ name })
+    .returning({ personId: personalities.id });
+  console.log("Added new person with ID: ", person[0].personId);
+  return person[0].personId;
 }
 
 export async function addAnswer({
@@ -25,7 +27,7 @@ export async function addAnswer({
       questionId,
       responseValue,
       responseDate: new Date(),
-    }); // Assuming the response date is set at insertion
+    });
     console.log(
       `Added new answer for personId: ${personId}, questionId: ${questionId}`
     );

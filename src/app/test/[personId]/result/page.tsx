@@ -2,4 +2,6 @@ import { PersonalityPartParams } from "../page";
 
 export default async function Part({
   params: { personId },
-}: PersonalityPartParams) {}
+}: PersonalityPartParams) {
+  return <h1>{personId}</h1>;
+}

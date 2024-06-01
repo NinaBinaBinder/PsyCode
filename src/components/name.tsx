@@ -19,7 +19,7 @@ export default function Name() {
         await addPerson({ name });
         toast.success(`Hello ${name} ~(‾▿‾)~`);
         setName("");
-        router.push(`././test/${await addPerson({name})}/1`);
+        router.push(`././test/${await addPerson({ name })}/1`);
       } catch (error) {
         console.error(error);
         toast.error("An error occurred while adding the name (╥﹏╥)");
@@ -28,20 +28,22 @@ export default function Name() {
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <p className="flex flex-col p-5 text-zinc-100 justify-center">
-        Welcome to your personality visualizator There are 5 parts with 5
-        statement each.
-        <br/> Lets start easy.
-      </p>
-      <form className="jutsify-center flex flex-col" onSubmit={handleStart}>
+    <div>
+      <div className="p-5 text-zinc-100 items-center">
+        <p>Welcome to your personality visualizator.</p>
+        <p> There are 5 parts with 5 statement each.</p>
+        <p className="justify-center">Lets start easy.</p>
+      </div>
+
+      <form className="justify-center flex flex-col" onSubmit={handleStart}>
         <input
           type="text"
-          value={name} // Bind the input value to the state
+          value={name}
           onChange={(e) => setName(e.currentTarget.value)}
           id="name"
+          autoComplete="off"
           placeholder="Enter your name"
-          className="border rounded-lg p-3 m-5"
+          className="rounded-lg p-3 m-5"
         />
         <button
           type="submit"

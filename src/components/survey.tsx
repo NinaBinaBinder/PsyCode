@@ -3,6 +3,7 @@
 import React, { ChangeEvent, useState } from "react";
 import { QuestionType } from "@/db/schema";
 import "../app/styles.css";
+import { addAnswer } from "@/db/actions";
 
 interface SurveyProps {
   part: number;
@@ -16,19 +17,23 @@ export function Survey({ part, personId, title, questions }: SurveyProps) {
     [key: string]: number | string;
   }>({});
 
-  function handleChange(
+  async function handleChange(
     questionId: string,
     event: ChangeEvent<HTMLInputElement>
   ) {
     event.preventDefault();
-
+    const responseValue = Number(event.currentTarget.value);
     const newResponses = {
       ...responses,
-      [questionId]: Number(event.currentTarget.value),
+      [questionId]: responseValue,
     };
     setResponses(newResponses);
-    console.log(responses, personId);
+  
+    // Save the response
+    await addAnswer({ personId, questionId, responseValue });
+    console.log(newResponses, personId);
   }
+  
 
   return (
     <div className="flex flex-col items-center">
