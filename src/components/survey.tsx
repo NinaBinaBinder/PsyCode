@@ -1,28 +1,33 @@
-'use client';
+"use client";
 
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from "react";
 import { QuestionType } from "@/db/schema";
-import '../app/styles.css';
+import "../app/styles.css";
 
 interface SurveyProps {
   part: number;
-  personId: string
+  personId: string;
   title: string;
   questions: QuestionType[];
 }
 
 export function Survey({ part, personId, title, questions }: SurveyProps) {
-  const [responses, setResponses] = useState<{ [key: number]: number }>({});
+  const [responses, setResponses] = useState<{
+    [key: string]: number | string;
+  }>({});
 
-  function handleChange(questionId: number, event: ChangeEvent<HTMLInputElement>) {
+  function handleChange(
+    questionId: string,
+    event: ChangeEvent<HTMLInputElement>
+  ) {
     event.preventDefault();
-    
+
     const newResponses = {
       ...responses,
-      [questionId]: Number(event.currentTarget.value)
+      [questionId]: Number(event.currentTarget.value),
     };
     setResponses(newResponses);
-    console.log(responses, personId)
+    console.log(responses, personId);
   }
 
   return (
@@ -38,7 +43,7 @@ export function Survey({ part, personId, title, questions }: SurveyProps) {
                 type="range"
                 id={String(question.id)}
                 className="w-5/6 mx-4"
-                value={responses[question.id] || 0} 
+                value={responses[question.id] || 0}
                 onChange={(event) => handleChange(question.id, event)}
               />
               <p>Agree</p>
@@ -48,6 +53,6 @@ export function Survey({ part, personId, title, questions }: SurveyProps) {
       </form>
     </div>
   );
-};
+}
 
 export default Survey;
