@@ -19,8 +19,8 @@ export default async function PersonalityPart({
   return (
     <main className="flex flex-col bg-black text-zinc-100 items-center p-24">
       <Survey
-        part={personalityPart[0].part}
-        title={personalityPart[0].partTitle}
+        part={personalityPart[1].part}
+        title={personalityPart[1].partTitle}
         questions={personalityPart}
       ></Survey>
       <div className="flex justify-between w-5/6 p-5">
