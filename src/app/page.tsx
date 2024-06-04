@@ -10,7 +10,7 @@ export default async function Home() {
      <div className="hidden lg:flex m-20">
        <QR/>
      </div>
-     <div className="lg:hidden m-20">
+     <div className="lg m-20">
       <Name/>
      </div>
     </main>

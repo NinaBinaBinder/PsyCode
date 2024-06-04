@@ -1,6 +1,6 @@
 import Survey from "@/components/survey";
 import { db } from "@/db/connection";
-import { questions } from "@/db/schema";
+import { personalities, questions } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
 
@@ -19,6 +19,10 @@ export default async function Person({
     .from(questions)
     .where(eq(questions.part, Number(surveyPart)));
   const currentPart = personalityPart[0].part;
+  const name = await db
+    .select()
+    .from(personalities)
+    .where(eq(personalities.id, personId));
 
   return (
     <main className="flex flex-col bg-black text-zinc-100 items-center p-24">
@@ -30,18 +34,19 @@ export default async function Person({
       ></Survey>
       <div className="flex justify-between w-5/6 p-5">
         <Link
-          replace
-          href={Number(part) === 1 ? "/" : `./scur`}
+          href={
+            Number(part) <= 1 ? `/` : `/test/${personId}/${currentPart - 1}`
+          }
           className="rounded-lg hover:bg-zinc-600 bg-zinc-800 p-2 px-5"
         >
           back
         </Link>
         <Link
-          replace
+          
           href={
-            currentPart >= 5
-              ? `/${personId}/result`
-              : `/test/${personId}/${currentPart + 1}`
+            currentPart < 5
+              ? `/test/${personId}/${currentPart + 1}`
+              : `../${personId}/result/${name[0].name}`
           }
           className="rounded-lg hover:bg-zinc-600 bg-zinc-800 p-2 px-5"
         >

@@ -1,9 +1,9 @@
 export type PersonalityPartParams = {
-  params: { personId: string };
+  params: { personId: string, personName: string };
 };
 
 export default async function Result({
-  params: { personId },
+  params: { personId, personName},
 }: PersonalityPartParams) {
   
 }

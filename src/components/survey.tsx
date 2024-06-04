@@ -48,7 +48,7 @@ export function Survey({ part, personId, title, questions }: SurveyProps) {
                 type="range"
                 id={String(question.id)}
                 className="w-5/6 mx-4"
-                value={responses[question.id] || 0}
+                value={responses[question.id]}
                 onChange={(event) => handleChange(question.id, event)}
               />
               <p>Agree</p>

@@ -40,3 +40,6 @@ export const answers = pgTable("answers", {
   responseValue: integer("response").notNull(),
   responseDate: timestamp("response_date").defaultNow(),
 });
+
+export type AnswerType = typeof answers.$inferSelect;
+
