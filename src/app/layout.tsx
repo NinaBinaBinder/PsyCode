@@ -17,11 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.className}`}>
+    <html lang="en" className={`${inter.className} bg-black`}>
       <body className="bg-gray-100">
         <Toaster position="top-center" />
         {children}
-        <Footer />
+       
       </body>
     </html>
   );

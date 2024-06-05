@@ -1,85 +1,158 @@
 "use client";
+import { Sketch, SketchProps } from "react-p5-wrapper";
 
-export type SketchParams = {
-  val11: number;
-  val12: number;
-  val13: number;
-  val14: number;
-  val15: number;
-  val21: number;
-  val22: number;
-  val23: number;
-  val24: number;
-  val25: number;
-  val31: number;
-  val32: number;
-  val33: number;
-  val34: number;
-  val35: number;
-  val41: number;
-  val42: number;
-  val43: number;
-  val44: number;
-  val45: number;
-  val51: number;
-  val52: number;
-  val53: number;
-  val54: number;
-  val55: number;
+type MySketchProps = SketchProps & {
+  values: number[];
 };
 
-//export function sketch(p5, val11, val12, val13, val14, val15, val21, val22, val23, val24, val25, val31, val32, val33, val34, val35 , val41, val42, val43, val44, val45, val51, val52, val53, val54, val55) {
-
-//export function sketch(p5 : P5CanvasInstance,  {params}: SketchParams): Sketch{
-//export function sketch({p5, val11, val12, val13, val14, val15 }: {p5: any, val11: number, val12: number, val13: number, val14: number, val15: number}): Sketch{
 export const sketch: Sketch<MySketchProps> = (p5) => {
+  let values: number[] = [];
   const width = window.innerWidth;
   const height = window.innerHeight;
   let pulse: number = 0;
 
-  let values = [];
-
-  function drawShape(
-    value1: number,
-    value2: number,
-    value3: number,
-    value4: number,
-    value5: number
-  ) {
-    let abstract = value1;
-    let hue = 210 + value2 + value3 + value4 + value5;
-    let saturation = 80 + value2 / 30 + value3 / 30 + value3 / 30 + value4 / 30;
-    let brightness = 70 + value1 / 30 + value2 / 30 + value3 / 30 + value4 / 30;
-    let fillcolor = p5.color(hue, saturation, brightness, 100);
-
-    p5.fill(fillcolor);
-    p5.noStroke();
-    p5.beginShape();
-    for (let angle = 0; angle < p5.TWO_PI; angle += 0.1) {
-      let xoff = p5.map(p5.cos(angle + pulse), -1, 1, 0, abstract);
-      let yoff = p5.map(p5.sin(angle + pulse), -1, 1, 0, abstract);
-      let r = p5.map(p5.noise(xoff, yoff), 0, 1, 50, 200);
-      let x = r * p5.cos(angle);
-      let y = r * p5.sin(angle);
-      p5.curveVertex(x, y);
-    }
-    p5.endShape(p5.CLOSE);
-  }
-
   p5.setup = () => {
     p5.createCanvas(width, height, p5.WEBGL);
-    p5.colorMode(p5.HSB, 360, 100, 100, 100);
+    p5.angleMode(p5.DEGREES);
+    p5.colorMode(p5.HSB, 100, 100, 100, 100); // Adding alpha to colorMode
+    p5.noFill();
+    p5.pixelDensity(2);
+  };
+
+  p5.updateWithProps = (props) => {
+    if (props.values) {
+      values = props.values;
+    }
   };
 
   p5.draw = () => {
-    p5.background(0);
-    pulse += 0.005;
-    drawShape(1, 2, 3, 4, 5);
-    /*drawShape(val21, val22, val23, val24, val25);
-    drawShape(val31, val32, val33, val34, val35);
-    drawShape(val41, val42, val43, val44, val45);
-    drawShape(val51, val52, val53, val54, val55);*/
+    // Set the background color (HSB mode: hue, saturation, brightness)
+    p5.background(0, 0, 0); // Adjust the HSB values as needed
+    p5.orbitControl(4, 4); // Mouse control
+    p5.rotateX(60);
+    pulse += 0.01;
+
+    // Define parameters for each shape
+    const shapes = [
+      {
+        hueIndex: 0,
+        satIndex: 1,
+        briIndex: 2,
+        bumpIndex: 3,
+        thetaIndex: 4,
+        phyIndex: 5,
+        sizeIndex: 1,
+      },
+      {
+        hueIndex: 7,
+        satIndex: 8,
+        briIndex: 9,
+        bumpIndex: 10,
+        thetaIndex: 11,
+        phyIndex: 12,
+        sizeIndex: 4,
+      },
+      {
+        hueIndex: 14,
+        satIndex: 15,
+        briIndex: 16,
+        bumpIndex: 17,
+        thetaIndex: 18,
+        phyIndex: 19,
+        sizeIndex: 5,
+      },
+      {
+        hueIndex: 21,
+        satIndex: 22,
+        briIndex: 23,
+        bumpIndex: 24,
+        thetaIndex: 25,
+        phyIndex: 26,
+        sizeIndex: 8,
+      },
+      {
+        hueIndex: 28,
+        satIndex: 29,
+        briIndex: 30,
+        bumpIndex: 31,
+        thetaIndex: 32,
+        phyIndex: 33,
+        sizeIndex: 10,
+      },
+    ];
+    //console.log(shapes)
+
+    // Draw each shape
+    for (let i = 1; i < shapes.length - 1; i++) {
+      const shape = shapes[i];
+      const hue = values[shape.hueIndex] ?? 120;
+      const saturation = 30;
+      const brightness = 100;
+      const bumpiness = 5;
+      const thetaValue = 5;
+      const phyValue = 5;
+
+      let size;
+      if (i === 0) {
+        size = 100; // First shape size
+      } else if (i === shapes.length - 1) {
+        size = 10; // Last shape size
+      } else {
+        // Scale sizes for intermediate shapes between 100 and 10
+        size = 100 - (90 * i) / (shapes.length - 1);
+      }
+
+      //console.log(i, 'hue: ', hue, 'saturation: ', saturation, 'brighntess: ', brightness, 'size: ', size)
+
+      p5.strokeWeight(3);
+      p5.stroke(hue, saturation, brightness, 80); // Set stroke color with opacity 40
+      p5.fill(hue, saturation, brightness, 80); // Set fill color with opacity 40
+      drawIrregularShape(size, bumpiness, thetaValue, phyValue, pulse);
+    }
   };
+
+  function drawIrregularShape(
+    r: number,
+    bumpiness: number,
+    thetaValue: number,
+    phyValue: number,
+    pulse: number
+  ) {
+    p5.beginShape(p5.POINTS);
+    for (let theta = 0; theta < 180; theta += 2) {
+      for (let phy = 0; phy < 360; phy += 2) {
+        let noiseFactor = p5.noise(theta * 0.1 + pulse, phy * 0.1 + pulse); // Adding noise for irregularity with pulse
+        let x =
+          r *
+          (1 +
+            bumpiness *
+              p5.sin(thetaValue * theta) *
+              p5.sin(phyValue * phy) *
+              noiseFactor) *
+          p5.sin(theta) *
+          p5.cos(phy);
+        let y =
+          r *
+          (1 +
+            bumpiness *
+              p5.sin(thetaValue * theta) *
+              p5.sin(phyValue * phy) *
+              noiseFactor) *
+          p5.sin(theta) *
+          p5.sin(phy);
+        let z =
+          r *
+          (1 +
+            bumpiness *
+              p5.sin(thetaValue * theta) *
+              p5.sin(phyValue * phy) *
+              noiseFactor) *
+          p5.cos(theta);
+        p5.vertex(x, y, z);
+      }
+    }
+    p5.endShape();
+  }
 
   return sketch;
 };

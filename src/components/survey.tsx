@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ChangeEvent, useState } from "react";
-import { QuestionType } from "@/db/schema";
+import { AnswerType, QuestionType } from "@/db/schema";
 import "../app/styles.css";
 import { addAnswer } from "@/db/actions";
 
@@ -13,27 +13,35 @@ interface SurveyProps {
 }
 
 export function Survey({ part, personId, title, questions }: SurveyProps) {
-  const [responses, setResponses] = useState<{
-    [key: string]: number | string;
-  }>({});
+  // Initialize state with default values of 50 for each question
+  const initialAnswers = questions.reduce((acc, question) => {
+    acc[personId] = acc[personId] || {};
+    acc[personId][question.id] = 50;
+    return acc;
+  }, {} as { [personId: string]: { [questionId: string]: number | string } });
+
+  const [answers, setAnswers] = useState<{ [personId: string]: { [questionId: string]: number | string } }>(initialAnswers);
 
   async function handleChange(
     questionId: string,
+    personId: string,
     event: ChangeEvent<HTMLInputElement>
   ) {
     event.preventDefault();
-    const responseValue = Number(event.currentTarget.value);
-    const newResponses = {
-      ...responses,
-      [questionId]: responseValue,
-    };
-    setResponses(newResponses);
-  
-    // Save the response
-    await addAnswer({ personId, questionId, responseValue });
-    console.log(newResponses, personId);
+    const answerValue = Number(event.currentTarget.value);
+    setAnswers((prevAnswers) => {
+      return {
+        ...prevAnswers,
+        [personId]: {
+          ...prevAnswers[personId],
+          [questionId]: answerValue,
+        },
+      };
+    });
+
+    // Save the response or replace them 
+    await addAnswer({ personId, questionId, responseValue: answerValue });
   }
-  
 
   return (
     <div className="flex flex-col items-center">
@@ -47,12 +55,16 @@ export function Survey({ part, personId, title, questions }: SurveyProps) {
               <input
                 type="range"
                 id={String(question.id)}
-                className="w-5/6 mx-4"
-                value={responses[question.id]}
-                onChange={(event) => handleChange(question.id, event)}
+                className="w-[50vh] mx-4"
+                min="0"
+                max="100"
+                defaultValue="50"
+                onChange={(event) => handleChange(question.id, personId, event)}
               />
               <p>Agree</p>
             </div>
+            <p className="text-zinc-500">
+            </p>
           </div>
         ))}
       </form>

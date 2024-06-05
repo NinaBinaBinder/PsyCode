@@ -31,10 +31,10 @@ const pixelify = Pixelify_Sans({
 });
 
 export const fonts = [
-  unifraktur,
-  comingSoon,
-  libreBarcode,
-  pixelify,
+  unifraktur.className,
+  comingSoon.className,
+  libreBarcode.className,
+  pixelify.className,
 ];
 
 export default function Title() {
@@ -50,7 +50,7 @@ export default function Title() {
     return () => clearInterval(intervalId);
   }, []);
 
-  const currentFont = fonts[currentFontIndex].className;
+  const currentFont = fonts[currentFontIndex];
 
   return (
     <div className="flex flex-col items-center text-white text-6xl sm:text-8xl ">
