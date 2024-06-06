@@ -1,5 +1,4 @@
 "use server";
-
 import Navbar from "@/components/navbar";
 import P5Wrapper from "@/components/p5-wrapper";
 import { sketch } from "@/components/sketch";

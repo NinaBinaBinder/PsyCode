@@ -7,8 +7,6 @@ import Title from "@/components/title";
 import { db } from "@/db/connection";
 import { answers, personalities, questions } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
-import { revalidatePath } from "next/dist/server/web/spec-extension/revalidate";
-
 
 export type FormAnswerType = {
   questionId: string;

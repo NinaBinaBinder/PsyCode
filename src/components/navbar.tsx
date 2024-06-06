@@ -19,7 +19,7 @@ export default function Navbar({ currentPage }: { currentPage?: string}) {
           personalities
         </button>
       </Link>
-      <Link href={'../personalities/latest'}>
+      <Link href={'/personalities/latest'}>
         <button
           className={
             currentPage !== "latest"
