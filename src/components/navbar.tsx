@@ -27,7 +27,7 @@ export default function Navbar({ currentPage }: { currentPage?: string}) {
               : "border-2 bg-white border-white text-black p-1 px-4 mx-2 hover:bg-zinc-300"
           }
         >
-          latest{" "}
+          live
         </button>
       </Link>
     </div>
