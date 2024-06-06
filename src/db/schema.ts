@@ -2,7 +2,6 @@ import {
   integer,
   pgEnum,
   pgTable,
-  serial,
   timestamp,
   uuid,
   varchar,
@@ -23,6 +22,7 @@ export const questions = pgTable("questions", {
   question: varchar("question", { length: 255 }).notNull(),
   partTitle: surveyPartEnum("partTitle").notNull(),
   part: integer("part").notNull(),
+  questionNumber: integer("questionNumber").notNull(),
 });
 
 export const personalities = pgTable("personalities", {
@@ -42,4 +42,3 @@ export const answers = pgTable("answers", {
 });
 
 export type AnswerType = typeof answers.$inferSelect;
-

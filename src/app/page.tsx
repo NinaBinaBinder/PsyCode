@@ -7,12 +7,14 @@ import Navbar from "@/components/navbar";
 export default async function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center p-24 text-white bg-black">
-      <Navbar/>
      <Title/>
-     <div className="hidden lg:flex m-20">
+      <Navbar/>
+     <div className="hidden lg:flex m-20"> 
+         
+
        <QR/>
      </div>
-     <div className="lg m-20">
+     <div className="lg:hidden m-20">
       <Name/>
      </div>
     </main>

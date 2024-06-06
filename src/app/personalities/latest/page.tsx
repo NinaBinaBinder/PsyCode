@@ -6,28 +6,26 @@ import { sketch } from "@/components/sketch";
 import Title from "@/components/title";
 import { db } from "@/db/connection";
 import { answers, personalities, questions } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
+import { revalidatePath } from "next/dist/server/web/spec-extension/revalidate";
 
-export type PersonalityPartParams = {
-  params: { personId: string };
-};
+
 export type FormAnswerType = {
   questionId: string;
   answerValue: number;
 }
 
-export default async function Result({
-  params: { personId },
-}: PersonalityPartParams) {
+export default async function Latest(){
+
+  //get the last person check for updates every few seconds
   const person = await db
     .select()
-    .from(personalities)
-    .where(eq(personalities.id, personId));
+    .from(personalities).orderBy(desc(personalities.dateAdded))
 
   const personAnswers = await db
     .selectDistinct()
     .from(answers).innerJoin(questions, eq(questions.id, answers.questionId))
-    .where(eq(answers.personId, personId)).orderBy(questions.questionNumber);
+    .where(eq(answers.personId, person[0].id)).orderBy(questions.questionNumber);
 
     let answerValues: FormAnswerType[] = [];
     for (let i = 0; i < 26; i++) {
@@ -40,22 +38,20 @@ export default async function Result({
         answerValues[questionNumber].answerValue = personAnswer.answers.responseValue;
       }
     });
-  
-  //console.log('in results: ', answerValues)
 
   return (
     <div className="h-full font-mono bg-black text-white">
       <div className="flex md:flex-row flex-col md:justify-between md:place-items-end mb-5">
         <Title />
 
-        <Navbar currentPage={"personalities"} />
+        <Navbar currentPage={"latest"}/>
       </div>
       <div className="z-40 mt-10 justify-center content-center text-lg items-center absolute left-1/2">
         <p>this is</p>
         <p className="font-bold text-4xl">{person[0].name}</p>
       </div>
       <div className="flex justify-center">
-        <P5Wrapper sketch={sketch} answerValues={answerValues} size={1500} />
+        <P5Wrapper sketch={sketch} answerValues={answerValues} size={2000} />
       </div>
     </div>
   );

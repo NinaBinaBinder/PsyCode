@@ -1,96 +1,67 @@
 "use client";
+import { FormAnswerType } from "@/app/test/[personId]/result/[name]/page";
 import { Sketch, SketchProps } from "react-p5-wrapper";
 
 type MySketchProps = SketchProps & {
-  values: number[];
+  values: FormAnswerType[];
+  size: number;
 };
 
 export const sketch: Sketch<MySketchProps> = (p5) => {
-  let values: number[] = [];
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+  let values: FormAnswerType[] = [];
+  let size: number = 20;
   let pulse: number = 0;
-
-  p5.setup = () => {
-    p5.createCanvas(width, height, p5.WEBGL);
-    p5.angleMode(p5.DEGREES);
-    p5.colorMode(p5.HSB, 100, 100, 100, 100); // Adding alpha to colorMode
-    p5.noFill();
-    p5.pixelDensity(2);
-  };
 
   p5.updateWithProps = (props) => {
     if (props.values) {
       values = props.values;
     }
+    if (props.size) {
+      size = props.size;
+      p5.resizeCanvas(size, size);
+    }
   };
 
+  p5.setup = () => {
+    p5.createCanvas(size*2, size, p5.WEBGL);
+    p5.angleMode(p5.DEGREES);
+    p5.colorMode(p5.HSB, 100, 100, 100, 100);
+    p5.noFill();
+    p5.pixelDensity(1);
+  };
   p5.draw = () => {
-    // Set the background color (HSB mode: hue, saturation, brightness)
-    p5.background(0, 0, 0); // Adjust the HSB values as needed
+    p5.background(0);
     p5.orbitControl(4, 4); // Mouse control
     p5.rotateX(60);
     pulse += 0.01;
-
     // Define parameters for each shape
-    const shapes = [
-      {
-        hueIndex: 0,
-        satIndex: 1,
-        briIndex: 2,
-        bumpIndex: 3,
-        thetaIndex: 4,
-        phyIndex: 5,
-        sizeIndex: 1,
-      },
-      {
-        hueIndex: 7,
-        satIndex: 8,
-        briIndex: 9,
-        bumpIndex: 10,
-        thetaIndex: 11,
-        phyIndex: 12,
-        sizeIndex: 4,
-      },
-      {
-        hueIndex: 14,
-        satIndex: 15,
-        briIndex: 16,
-        bumpIndex: 17,
-        thetaIndex: 18,
-        phyIndex: 19,
-        sizeIndex: 5,
-      },
-      {
-        hueIndex: 21,
-        satIndex: 22,
-        briIndex: 23,
-        bumpIndex: 24,
-        thetaIndex: 25,
-        phyIndex: 26,
-        sizeIndex: 8,
-      },
-      {
-        hueIndex: 28,
-        satIndex: 29,
-        briIndex: 30,
-        bumpIndex: 31,
-        thetaIndex: 32,
-        phyIndex: 33,
-        sizeIndex: 10,
-      },
-    ];
+    
     //console.log(shapes)
 
+    //drawIrregularShape(size, hue, saturation, brightness bumpiness, thetaValue, phyValue, pulse);
+
+    drawIrregularShape(
+      size / 10,
+      values[0].answerValue,
+      100,
+      100,
+      10,
+      2,
+      1,
+      pulse
+    );
+
     // Draw each shape
-    for (let i = 1; i < shapes.length - 1; i++) {
+    /*
+    for (let i = 1; i < shapes.length ; i++) {
       const shape = shapes[i];
-      const hue = values[shape.hueIndex] ?? 120;
-      const saturation = 30;
+      const hue = values[shape.hueIndex];
+     // console.log(i, values[shape.hueIndex])
+      const saturation = 100;
       const brightness = 100;
       const bumpiness = 5;
-      const thetaValue = 5;
-      const phyValue = 5;
+      const thetaValue = 50;
+      const phyValue = 10;
 
       let size;
       if (i === 0) {
@@ -108,16 +79,20 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
       p5.stroke(hue, saturation, brightness, 80); // Set stroke color with opacity 40
       p5.fill(hue, saturation, brightness, 80); // Set fill color with opacity 40
       drawIrregularShape(size, bumpiness, thetaValue, phyValue, pulse);
-    }
+    }*/
   };
 
   function drawIrregularShape(
     r: number,
+    hue: number,
+    saturation: number,
+    brighntess: number,
     bumpiness: number,
     thetaValue: number,
     phyValue: number,
     pulse: number
   ) {
+    p5.stroke(hue, saturation, brighntess, 100);
     p5.beginShape(p5.POINTS);
     for (let theta = 0; theta < 180; theta += 2) {
       for (let phy = 0; phy < 360; phy += 2) {

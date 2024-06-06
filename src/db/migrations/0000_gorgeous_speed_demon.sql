@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS "questions" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"question" varchar(255) NOT NULL,
 	"partTitle" "surveyPartEnum" NOT NULL,
-	"part" integer NOT NULL
+	"part" integer NOT NULL,
+	"questionNumber" integer NOT NULL
 );
 --> statement-breakpoint
 DO $$ BEGIN

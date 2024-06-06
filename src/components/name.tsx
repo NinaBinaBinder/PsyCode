@@ -16,7 +16,6 @@ export default function Name() {
       toast.error("(ง •̀_•́)ง Please enter a name with at least 3 characters.");
     } else {
       try {
-        await addPerson({ name });
         toast.success(`Hello ${name} ~(‾▿‾)~`);
         setName("");
         router.push(`././test/${await addPerson({ name })}/1`);
@@ -29,27 +28,29 @@ export default function Name() {
 
   return (
     <div>
-      <div className="p-5 text-zinc-100 items-center">
-        <p>Welcome to your personality visualizator.</p>
-        <p> There are 5 parts with 5 statement each.</p>
-        <p className="justify-center">Lets start easy.</p>
+      <div className="text-zinc-100 flex flex-col text-center w-full justify-center mb-10">
+        <p>Welcome to your personality visualizator.
+          <br />
+        There are 5 parts with 5 statement each.</p>
+        <br />
+        <p>Lets start easy.</p>
       </div>
 
-      <form className="justify-center flex flex-col" onSubmit={handleStart}>
+      <form className="justify-center flex flex-col gap-4" onSubmit={handleStart}>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.currentTarget.value)}
           id="name"
           autoComplete="off"
-          placeholder="Enter your name"
-          className="rounded-lg p-3 m-5"
+          placeholder="enter your name"
+          className="p-4 text-black rounded-none bg-white"
         />
         <button
           type="submit"
-          className="bg-zinc-800 p-4 rounded-xl hover:bg-zinc-500 font-bold text-white"
+          className="border-2 p-4 hover:bg-zinc-800 font-black text-white"
         >
-          Start
+         START
         </button>
       </form>
     </div>

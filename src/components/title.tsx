@@ -6,15 +6,10 @@ import {
   Libre_Barcode_39_Extended_Text,
   Pixelify_Sans,
 } from "next/font/google";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const unifraktur = UnifrakturMaguntia({ subsets: ["latin"], weight: ["400"], display: 'swap', adjustFontFallback: false });
-const comingSoon = Coming_Soon({
-  subsets: ["latin"],
-  weight: ["400"],
-  display: "swap",
-  adjustFontFallback: false,
-});
 
 const libreBarcode = Libre_Barcode_39_Extended_Text({
   subsets: ["latin"],
@@ -32,7 +27,6 @@ const pixelify = Pixelify_Sans({
 
 export const fonts = [
   unifraktur.className,
-  comingSoon.className,
   libreBarcode.className,
   pixelify.className,
 ];
@@ -53,8 +47,8 @@ export default function Title() {
   const currentFont = fonts[currentFontIndex];
 
   return (
-    <div className="flex flex-col items-center text-white text-6xl sm:text-8xl ">
-      <p className={currentFont}>PsyCode</p>
+    <div className="flex flex-col items-center m-5 mb:mb-20 text-white text-6xl sm:text-8xl ">
+      <Link href='/'><p className={currentFont}>PsyCode</p></Link>
     </div>
   );
 }

@@ -1,6 +1,5 @@
 /* Ensures the entire slider has a consistent background */
 input[type="range"] {
-  -webkit-appearance: none; /* Removes default browser styling */
   background: transparent; /* Ensures no background color */
   width: 100%; /* Ensures it takes the full width provided by its container */
   outline: none; /* Removes the outline on focus */
@@ -9,19 +8,19 @@ input[type="range"] {
 /* Styles the track (the part of the slider bar) */
 input[type="range"]::-webkit-slider-runnable-track {
   height: 8px;
-  background: purple;
+  background: blue;
   border-radius: 5px;
 }
 
 input[type="range"]::-moz-range-track {
   height: 8px;
-  background: purple;
+  background: blue;
   border-radius: 5px;
 }
 
 input[type="range"]::-ms-track {
   height: 8px;
-  background: purple; /* For IE */
+  background: blue; /* For IE */
   border: none; /* Removes default border styles in IE */
   color: transparent; /* Ensures IE slider thumb does not have a background */
 }

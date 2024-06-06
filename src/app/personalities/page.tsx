@@ -1,16 +1,26 @@
 import Card from "@/components/card";
+import Navbar from "@/components/navbar";
+import Title from "@/components/title";
 import { db } from "@/db/connection";
 import { personalities } from "@/db/schema";
+import { desc } from "drizzle-orm";
 
-export default  async function Personalities(){
+export default async function Personalities() {
+  const allPeople = await db.select().from(personalities).orderBy(desc(personalities.dateAdded));
+  console.log(allPeople.length)
 
-    const allPeople = await db.select().from(personalities)
 
-    return(
-        <div className="grid grid-cols-4 gap-4 bg-black">
-            {allPeople.map((person)=> 
-            <Card key={person.id} person={person}/>)}
-        </div>
-    )
-
+  return (
+    <div className="p-5 bg-black text-white">
+      <div className="flex flex-row justify-between place-items-end mb-5">
+        <Title />
+        <Navbar currentPage={"personalities"}/>
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        {allPeople.map((person) => (
+          <Card key={person.id} person={person} />
+        ))}
+      </div>
+    </div>
+  );
 }

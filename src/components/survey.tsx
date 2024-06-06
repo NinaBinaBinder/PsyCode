@@ -1,56 +1,50 @@
 "use client";
 
-import React, { ChangeEvent, useState } from "react";
-import { AnswerType, QuestionType } from "@/db/schema";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { QuestionType } from "@/db/schema";
 import "../app/styles.css";
 import { addAnswer } from "@/db/actions";
+import Link from "next/link";
 
 interface SurveyProps {
   part: number;
   personId: string;
+  name: string;
   title: string;
   questions: QuestionType[];
 }
 
-export function Survey({ part, personId, title, questions }: SurveyProps) {
-  // Initialize state with default values of 50 for each question
-  const initialAnswers = questions.reduce((acc, question) => {
-    acc[personId] = acc[personId] || {};
-    acc[personId][question.id] = 50;
-    return acc;
-  }, {} as { [personId: string]: { [questionId: string]: number | string } });
-
-  const [answers, setAnswers] = useState<{ [personId: string]: { [questionId: string]: number | string } }>(initialAnswers);
-
+export function Survey({
+  part,
+  personId,
+  name,
+  title,
+  questions,
+}: SurveyProps) {
+  
   async function handleChange(
     questionId: string,
-    personId: string,
     event: ChangeEvent<HTMLInputElement>
   ) {
-    event.preventDefault();
     const answerValue = Number(event.currentTarget.value);
-    setAnswers((prevAnswers) => {
-      return {
-        ...prevAnswers,
-        [personId]: {
-          ...prevAnswers[personId],
-          [questionId]: answerValue,
-        },
-      };
+    await addAnswer({
+      personId,
+      questionId,
+      responseValue: answerValue,
     });
-
-    // Save the response or replace them 
-    await addAnswer({ personId, questionId, responseValue: answerValue });
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <p className="font-black text-xl m-3">{`${part}. ${title}`}</p>
+    <div className="flex flex-col items-center text-center w-screen bg-black">
+      <p className="font-black text-xl pb-10">{`${part}. ${title}`}</p>
       <form>
         {questions.map((question) => (
-          <div key={question.id} className="flex flex-col items-center py-4">
+          <div
+            key={question.id}
+            className="flex flex-col items-center p-2 py-4"
+          >
             <p className="font-semibold text-sm">{question.question}</p>
-            <div className="flex w-full text-sm items-center p-4">
+            <div className="flex text-sm items-center py-5 ">
               <p>Disagree</p>
               <input
                 type="range"
@@ -59,14 +53,35 @@ export function Survey({ part, personId, title, questions }: SurveyProps) {
                 min="0"
                 max="100"
                 defaultValue="50"
-                onChange={(event) => handleChange(question.id, personId, event)}
+                onChange={(event) => handleChange(question.id, event)}
               />
               <p>Agree</p>
             </div>
-            <p className="text-zinc-500">
-            </p>
+            <p className="text-zinc-500"></p>
           </div>
         ))}
+        <div className="flex justify-between w-screen p-5">
+          <Link
+            href={
+              Number(part) <= 1
+                ? `/`
+                : `/test/${personId}/${questions[0].part - 1}`
+            }
+            className="hover:bg-zinc-900 bg-zinc-700 p-2 px-5"
+          >
+            back
+          </Link>
+          <Link
+            href={
+              questions[0].part < 5
+                ? `/test/${personId}/${questions[0].part + 1}`
+                : `../${personId}/result/${name}`
+            }
+            className="hover:bg-zinc-900 bg-zinc-700 p-2 px-5"
+          >
+            {questions[0].part < 5 ? "next" : "result"}
+          </Link>
+        </div>
       </form>
     </div>
   );

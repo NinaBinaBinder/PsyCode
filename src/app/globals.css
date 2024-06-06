@@ -18,3 +18,61 @@ body {
     text-wrap: balance;
   }
 }
+/* Ensures the entire slider has a consistent background */
+input[type="range"] {
+  -webkit-appearance: none; /* Removes default browser styling */
+  background: transparent; /* Ensures no background color */
+  width: 100%; /* Ensures it takes the full width provided by its container */
+  outline: none; /* Removes the outline on focus */
+}
+
+/* Styles the track (the part of the slider bar) */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  background: purple;
+  border-radius: 5px;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 8px;
+  background: purple;
+  border-radius: 5px;
+}
+
+input[type="range"]::-ms-track {
+  height: 8px;
+  background: purple; /* For IE */
+  border: none; /* Removes default border styles in IE */
+  color: transparent; /* Ensures IE slider thumb does not have a background */
+}
+
+/* Styles the thumb (the draggable circle on the slider) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Necessary to remove default styling in WebKit browsers */
+  margin-top: -4px; /* Adjusts vertical position to align with the track */
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none; /* Add this to ensure no border */
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+input[type="range"]::-ms-thumb {
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+

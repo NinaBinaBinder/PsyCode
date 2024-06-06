@@ -1,5 +1,5 @@
 {
-  "id": "c42fe02d-c374-4c05-b440-c2b858039c94",
+  "id": "6ca45cc0-9692-4abd-a3da-341a7f057e51",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "6",
   "dialect": "postgresql",
@@ -129,6 +129,12 @@
         },
         "part": {
           "name": "part",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "questionNumber": {
+          "name": "questionNumber",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
