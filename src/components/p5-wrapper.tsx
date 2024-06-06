@@ -1,38 +1,53 @@
-'use client'
+"use client";
 
 import { FormAnswerType } from "@/app/test/[personId]/result/[name]/page";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import type { Sketch } from "@p5-wrapper/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function P5Wrapper({sketch, answerValues, size}: {sketch: Sketch, answerValues: FormAnswerType[], size: number}) {
-const [sketchSize, setSketchSize]= useState(2000)
+export default function P5Wrapper({
+  sketch,
+  answerValues,
+  size,
+}: {
+  sketch: Sketch;
+  answerValues: FormAnswerType[];
+  size: number;
+}) {
+  const [sketchSize, setSketchSize] = useState(2000);
+  const router = useRouter();
 
-useEffect(() => {
-  const updateSketchSize = () => {
-    if (window !== undefined) {
-      if (window.innerWidth < 768) { 
-        setSketchSize(500);
-      } else {
-        setSketchSize(window.innerWidth);
+  useEffect(() => {
+    const updateSketchSize = () => {
+      if (window !== undefined) {
+        if (window.innerWidth < 768) {
+          setSketchSize(500);
+        } else {
+          setSketchSize(window.innerWidth);
+        }
       }
-    }
-  };
+    };
 
-  updateSketchSize(); // Update initially
-  window.addEventListener('resize', updateSketchSize); // Update on resize
+    updateSketchSize(); // Update initially
+    window.addEventListener("resize", updateSketchSize); // Update on resize
 
-  const interval = setInterval(() => {
-    window.location.reload();
-  }, 10000);
+    const interval = setInterval(() => {
+      router.refresh;
+    }, 10000);
 
-  return () => {
-    clearInterval(interval);
-    window.removeEventListener('resize', updateSketchSize);
-  };
-}, []);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("resize", updateSketchSize);
+    };
+  }, []);
 
-  
-  return <NextReactP5Wrapper sketch={sketch} values={answerValues} size={sketchSize}/>;
+  return (
+    <NextReactP5Wrapper
+      className={"h-[20vh]"}
+      sketch={sketch}
+      values={answerValues}
+      size={sketchSize}
+    />
+  );
 }
-

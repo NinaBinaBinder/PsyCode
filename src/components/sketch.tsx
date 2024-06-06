@@ -11,6 +11,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
   let values: FormAnswerType[] = [];
   let size: number = 20;
   let pulse: number = 0;
+  let random: number = 0;
 
   p5.updateWithProps = (props) => {
     if (props.values) {
@@ -18,67 +19,68 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     }
     if (props.size) {
       size = props.size;
-      p5.resizeCanvas(size, size);
+      p5.resizeCanvas(size, size / 2);
     }
   };
 
   p5.setup = () => {
-    p5.createCanvas(size, size/2, p5.WEBGL);
-
+    p5.createCanvas(200, 200, p5.WEBGL);
+    let random = p5.random(0, 10);
     p5.angleMode(p5.DEGREES);
     p5.colorMode(p5.HSB, 100, 100, 100, 100);
     p5.noFill();
+    p5.strokeWeight(1);
     p5.pixelDensity(1);
   };
   p5.draw = () => {
     p5.background(0);
     p5.orbitControl(4, 4); // Mouse control
-    p5.rotateX(60);
+    p5.rotateX(65);
     pulse += 0.01;
-    // Define parameters for each shape
 
-    //console.log(shapes)
-    let sumValues1 =
-      values[0].answerValue +
-      values[1].answerValue +
-      values[2].answerValue +
-      values[3].answerValue +
-      values[4].answerValue;
-    let hue1 = 120 + (sumValues1 / 500) * 210;
-    let saturation1 = 40 + (sumValues1 / 500) * 60;
-    let brightness1 = 40 + (sumValues1 / 500) * 60;
-    let abstract1 = sumValues1 / 400;
+    let sumValues1 = values
+      .slice(0, 5)
+      .reduce((acc, val) => acc + val.answerValue, 0);
+    let hue1 = 50 + (sumValues1 / 500) * 50;
+    let saturation1 = 80 + sumValues1 / 25;
+    let abstract1 = sumValues1 / 50;
+    drawIrregularShape(
+      size/5,
+      hue1,
+      saturation1,
+      100,
+      abstract1/10,
+      abstract1+2,
+      abstract1+3,
+      pulse
+    );
 
-    drawIrregularShape(size/ 4, 20, saturation1, 100, abstract1, abstract1, abstract1, pulse);
+    let sumValues2 = values
+      .slice(6, 9)
+      .reduce((acc, val) => acc + val.answerValue, 0);
+    let hue2 = 60 + (sumValues2 / 500) * 40;
+    let saturation2 = 80 + sumValues1 / 25;
+    let abstract2 = sumValues2 / 50;
 
+    drawIrregularShape(
+      size/9,
+      hue2,
+      saturation2,
+      100,
+      abstract2/10,
+      abstract2,
+      abstract2,
+      pulse
+    );
 
-    let sumValues2 =
-      values[5].answerValue +
-      values[6].answerValue +
-      values[7].answerValue +
-      values[8].answerValue +
-      values[9].answerValue;
-    let hue2 = 120 + (sumValues2 / 500) * 210;
-    let saturation2 = 40 + (sumValues2 / 500) * 60;
-    let brightness2 = 40 + (sumValues2 / 500) * 60;
-    let abstract2 = sumValues2 / 500;
+    let sumValues3 = values
+      .slice(10, 14)
+      .reduce((acc, val) => acc + val.answerValue, 0);
+    let hue3 = 10 + (sumValues3 / 500) * 50;
+    let saturation3 = 60 + (sumValues3 / 25);
+    let abstract3 = sumValues3 / 50;
 
-    drawIrregularShape(size/ 4.5, hue2, saturation2, 100, abstract2, abstract2, abstract2, pulse);
-
-
-    let sumValues3 =
-      values[10].answerValue +
-      values[11].answerValue +
-      values[12].answerValue +
-      values[13].answerValue +
-      values[14].answerValue;
-    let hue3 = 60 + (sumValues3 / 500) * 300;
-    let saturation3 = 40 + (sumValues3 / 500) * 60;
-    let brightness3 = 90 + (sumValues3 / 500) * 10;
-    let abstract3 = sumValues3 / 500;
-
-    drawIrregularShape(size / 7, hue3, saturation3, 100, abstract3, abstract3, abstract3, pulse);
-
+    drawIrregularShape(size/11, 70, saturation3, 90, abstract3/10, abstract3 +2, abstract3, pulse);
 
     let sumValues4 =
       values[15].answerValue +
@@ -86,13 +88,12 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
       values[17].answerValue +
       values[18].answerValue +
       values[19].answerValue;
-    let hue4 = 60 + (sumValues4 / 500) * 210;
+    let hue4 = (sumValues4 / 500) * 21;
     let saturation4 = 30 + (sumValues4 / 500) * 70;
     let brightness4 = 90 - (sumValues4 / 500) * 40;
     let abstract4 = sumValues4 / 500;
 
-    drawIrregularShape(size / 9, hue4, saturation4, 100, abstract4, abstract4, abstract4, pulse);
-
+    // drawIrregularShape(10, hue4, saturation4, 100, abstract4, abstract4, abstract4, pulse);
 
     let sumValues5 =
       values[20].answerValue +
@@ -100,13 +101,12 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
       values[22].answerValue +
       values[23].answerValue +
       values[24].answerValue;
-    let hue5 = 60 + (sumValues5 / 500) * 210;
+    let hue5 = (sumValues5 / 500) * 21;
     let saturation5 = 30 + (sumValues5 / 500) * 70;
     let brightness5 = 90 - (sumValues5 / 500) * 40;
     let abstract5 = sumValues5 / 500;
-    
-    drawIrregularShape(size / 20, hue5, saturation5, 100, abstract5, abstract5, abstract5, pulse);
 
+    //drawIrregularShape(5, hue5, saturation5, 100, abstract5, abstract5, abstract5, pulse);
   };
 
   function drawIrregularShape(

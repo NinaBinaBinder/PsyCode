@@ -16,10 +16,11 @@ export default async function Card({ person }: { person: PersonType}) {
     return formattedDate;
   }
   return (
-    <div className="bg-white bg-opacity-50 p-5 ">
+    <div className="bg-white bg-opacity-30 p-5 ">
       <Link href={`../test/${person.id}/result/${person.name}`}>
         <div id="sketch" className="size-5">
-        <div className="flex border">
+      <div className="flex border">
+
       </div>
         </div>
         <div id="person">
