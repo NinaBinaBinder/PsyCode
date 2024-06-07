@@ -9,7 +9,7 @@ export default async function Home() {
     <main className="flex min-h-screen flex-col items-center p-24 text-white bg-black">
       <Title>PsyCode</Title>
       <Navbar />
-      <div className="hidden lg:flex m-20">
+      <div className="lg:flex m-20">
         <QR />
       </div>
       <div className="lg:hidden m-20">
