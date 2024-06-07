@@ -1,6 +1,6 @@
 "use server";
 import Navbar from "@/components/navbar";
-import P5Wrapper from "@/components/p5-wrapper";
+import P5WrapperStable from "@/components/p5-wrapper-stable";
 import { sketch } from "@/components/sketch";
 import Title from "@/components/title";
 import { db } from "@/db/connection";
@@ -51,7 +51,7 @@ export default async function Result({
         <p className="font-bold text-6xl">{person[0].name}</p>
       </div>
       <div className="flex justify-center">
-        <P5Wrapper sketch={sketch} answerValues={answerValues}/>
+        <P5WrapperStable sketch={sketch} answerValues={answerValues}/>
       </div>
     </div>
   );

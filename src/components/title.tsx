@@ -9,7 +9,12 @@ import {
 import Link from "next/link";
 import { useState, useEffect, ReactNode } from "react";
 
-const unifraktur = UnifrakturMaguntia({ subsets: ["latin"], weight: ["400"], display: 'swap', adjustFontFallback: false });
+const unifraktur = UnifrakturMaguntia({
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+  adjustFontFallback: false,
+});
 
 const libreBarcode = Libre_Barcode_39_Extended_Text({
   subsets: ["latin"],
@@ -27,11 +32,11 @@ const pixelify = Pixelify_Sans({
 
 export const fonts = [
   unifraktur.className,
-  libreBarcode.className,
   pixelify.className,
+  libreBarcode.className,
 ];
 
-export default function Title({children}: {children: ReactNode}) {
+export default function Title({ children }: { children: ReactNode }) {
   const [currentFontIndex, setCurrentFontIndex] = useState(0);
 
   useEffect(() => {
@@ -48,7 +53,9 @@ export default function Title({children}: {children: ReactNode}) {
 
   return (
     <div className="flex flex-col items-center m-5 mb:mb-20 text-white text-6xl sm:text-8xl ">
-      <Link href='/'><p className={currentFont}>{children}</p></Link>
+      <Link href="/">
+        <p className={currentFont}>{children}</p>
+      </Link>
     </div>
   );
 }

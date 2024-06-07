@@ -6,7 +6,7 @@ import type { Sketch } from "@p5-wrapper/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function P5Wrapper({
+export default function P5WrapperStable({
   sketch,
   answerValues,
 }: {
@@ -28,14 +28,7 @@ export default function P5Wrapper({
   
     updateSketchSize();
     window.addEventListener("resize", updateSketchSize);
-  
-    const interval = setInterval(() => {
-      console.log('Reloading page');
-      window.location.reload(); 
-    }, 10000);
-  
     return () => {
-      clearInterval(interval);
       window.removeEventListener("resize", updateSketchSize);
     };
   }, []);

@@ -9,7 +9,7 @@ type MySketchProps = SketchProps & {
 
 export const sketch: Sketch<MySketchProps> = (p5) => {
   let values: FormAnswerType[] = [];
-  let size: number = 200;
+  let size: number = 2000;
   let pulse: number = 0;
 
   p5.updateWithProps = (props) => {
@@ -23,8 +23,8 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
   };
 
   p5.setup = () => {
+    p5.frameRate(3)
     p5.createCanvas(200, 200, p5.WEBGL);
-    let random = p5.random(0, 10);
     p5.angleMode(p5.DEGREES);
     p5.colorMode(p5.HSB, 100, 100, 100, 100);
     p5.noFill();
@@ -44,29 +44,32 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     let saturation1 = 80 + sumValues1 / 25;
     let abstract1 = sumValues1 / 50;
     drawIrregularShape(
-      size/5,
+      size / 4,
       hue1,
       saturation1,
-      100,
-      abstract1/10,
-      abstract1+2,
-      abstract1+3,
+      90,
+      abstract1 / 10,
+      abstract1 + sumValues1 / 100,
+      abstract1 + sumValues1 / 100,
       pulse
     );
 
-    let sumValues2 = values
-      .slice(6, 9)
-      .reduce((acc, val) => acc + val.answerValue, 0);
+    let sumValues2 =
+      values[5].answerValue +
+      values[6].answerValue +
+      values[7].answerValue +
+      values[8].answerValue -
+      values[9].answerValue;
     let hue2 = 60 + (sumValues2 / 500) * 40;
     let saturation2 = 80 + sumValues1 / 25;
     let abstract2 = sumValues2 / 50;
 
     drawIrregularShape(
-      size/9,
+      size / 5,
       hue2,
       saturation2,
-      100,
-      abstract2/10,
+      90,
+      abstract2 / 5,
       abstract2,
       abstract2,
       pulse
@@ -75,37 +78,57 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     let sumValues3 = values
       .slice(10, 14)
       .reduce((acc, val) => acc + val.answerValue, 0);
-    let hue3 = 10 + (sumValues3 / 500) * 50;
-    let saturation3 = 60 + (sumValues3 / 25);
+    let hue3 = 20 + (sumValues3/ 50) * 5 ;
+    console.log(hue3)
+    let brightness3 = 100 - (0.06 * sumValues3);
     let abstract3 = sumValues3 / 50;
 
-    drawIrregularShape(size/11, 70, saturation3, 90, abstract3/10, abstract3 +2, abstract3, pulse);
+    drawIrregularShape(
+      size / 7,
+      hue3,
+      100,
+      brightness3,
+      abstract3 ,
+      abstract3,
+      abstract3,
+      pulse
+    );
 
-    let sumValues4 =
-      values[15].answerValue +
-      values[16].answerValue +
-      values[17].answerValue +
-      values[18].answerValue +
-      values[19].answerValue;
+    let sumValues4 = values
+      .slice(15, 19)
+      .reduce((acc, val) => acc + val.answerValue, 0);
     let hue4 = (sumValues4 / 500) * 21;
-    let saturation4 = 30 + (sumValues4 / 500) * 70;
-    let brightness4 = 90 - (sumValues4 / 500) * 40;
-    let abstract4 = sumValues4 / 500;
+    let saturation4 = 60 + sumValues3 / 25;
+    let abstract4 = sumValues4 / 50;
 
-    // drawIrregularShape(10, hue4, saturation4, 100, abstract4, abstract4, abstract4, pulse);
+    drawIrregularShape(
+      size / 30,
+      hue4,
+      saturation4,
+      100,
+      abstract4,
+      abstract4,
+      abstract4,
+      pulse
+    );
 
-    let sumValues5 =
-      values[20].answerValue +
-      values[21].answerValue +
-      values[22].answerValue +
-      values[23].answerValue +
-      values[24].answerValue;
-    let hue5 = (sumValues5 / 500) * 21;
+    let sumValues5 = values
+      .slice(20, 25)
+      .reduce((acc, val) => acc + val.answerValue, 0);
+    let hue5 = 20 + sumValues5 / 50 / 7;
     let saturation5 = 30 + (sumValues5 / 500) * 70;
-    let brightness5 = 90 - (sumValues5 / 500) * 40;
-    let abstract5 = sumValues5 / 500;
+    let abstract5 = sumValues5 / 50;
 
-    //drawIrregularShape(5, hue5, saturation5, 100, abstract5, abstract5, abstract5, pulse);
+    drawIrregularShape(
+      20,
+      70,
+      saturation5,
+      100,
+      abstract5,
+      abstract5,
+      abstract5 * 2,
+      pulse
+    );
   };
 
   function drawIrregularShape(
@@ -124,14 +147,15 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
       for (let phy = 0; phy < 360; phy += 2) {
         let noiseFactor = p5.noise(theta * 0.1 + pulse, phy * 0.1 + pulse); // Adding noise for irregularity with pulse
         let x =
+          pulse +
           r *
-          (1 +
-            bumpiness *
-              p5.sin(thetaValue * theta) *
-              p5.sin(phyValue * phy) *
-              noiseFactor) *
-          p5.sin(theta) *
-          p5.cos(phy);
+            (1 +
+              bumpiness *
+                p5.sin(thetaValue * theta) *
+                p5.sin(phyValue * phy) *
+                noiseFactor) *
+            p5.sin(theta) *
+            p5.cos(phy);
         let y =
           r *
           (1 +

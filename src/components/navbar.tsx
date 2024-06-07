@@ -12,8 +12,8 @@ export default function Navbar({ currentPage }: { currentPage?: string}) {
         <button
           className={
             currentPage !== "personalities"
-              ? "rounded-full border-2 p-1 px-4 mx-2 hover:bg-zinc-700"
-              : "rounded-full border-2 bg-white border-white text-black p-1 px-4 mx-2 hover:bg-zinc-300"
+              ? "rounded-full border-2 p-1 px-4 mx-2  hover:bg-zinc-700"
+              : "rounded-full border-2 bg-white italic font-serif border-white text-black p-1 px-4 mx-2 hover:bg-zinc-300"
           }
         >
           personalities
@@ -24,7 +24,7 @@ export default function Navbar({ currentPage }: { currentPage?: string}) {
           className={
             currentPage !== "latest"
               ? "rounded-full border-2 p-1 px-4 mx-2 italic font-serif hover:bg-zinc-700"
-              : "rounded-full border-2 bg-white border-white text-black p-1 px-4 mx-2 hover:bg-zinc-300"
+              : "rounded-full border-2 bg-white border-white italic font-serif text-black p-1 px-4 mx-2 hover:bg-zinc-300"
           }
         >
           live

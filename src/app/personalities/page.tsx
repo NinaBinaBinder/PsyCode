@@ -12,10 +12,10 @@ export default async function Personalities() {
     <div className="p-5 bg-black text-white">
       <div className="flex flex-row justify-between place-items-end mb-5">
       <Title>PsyCode</Title>
-        <Navbar currentPage={"personalities"}/>
+        <Navbar currentPage="personalities"/>
       </div>      <p>{allPeople.length}</p>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         {allPeople.map((person) => (
           <Card key={person.id} person={person} />
         ))}

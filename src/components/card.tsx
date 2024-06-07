@@ -1,32 +1,34 @@
+'use client'
+
 import { PersonType } from "@/db/schema";
 import Link from "next/link";
-import P5Wrapper from "./p5-wrapper";
-import { sketch } from "./sketch";
+import { fonts } from "./title";
 
-export default async function Card({ person }: { person: PersonType}) {
+export default function Card({ person }: { person: PersonType }) {
   function formatDate(dateString: string) {
     const date = new Date(dateString);
-
-    const formattedDate = date.toLocaleTimeString("en-US", {
+    
+    return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
       day: "numeric",
+      hour: '2-digit',
+      minute: '2-digit',
+
     });
-
-    return formattedDate;
   }
-  return (
-    <div className="bg-white bg-opacity-30 p-5 ">
-      <Link href={`../test/${person.id}/result/${person.name}`}>
-        <div id="sketch" className="size-5">
-      <div className="flex border">
 
-      </div>
-        </div>
-        <div id="person">
-          <p className="font-bold">{person.name}</p>
-          <p>{person.dateAdded ? formatDate(String(person.dateAdded)) : "error"}</p>
-        </div>
+  function randomFont(fonts: string[]) {
+    return fonts[Math.floor(Math.random() * 2)];
+  }
+
+  return (
+    <div className="bg-white rounded-xl border hover:bg-opacity-40 bg-opacity-30 p-5">
+      <Link href={`../test/${person.id}/result/${person.name}`}>
+          <p className={`${randomFont(fonts)} text-2xl`}>{person.name}</p>
+          <p className=" italic text-sm">
+            {person.dateAdded ? formatDate(String(person.dateAdded)) : ""}
+          </p>
       </Link>
     </div>
   );
