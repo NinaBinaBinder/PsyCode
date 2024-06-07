@@ -27,7 +27,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     p5.angleMode(p5.DEGREES);
     p5.colorMode(p5.HSB, 100, 100, 100, 100);
     p5.noFill();
-    p5.strokeWeight(0.5);
+    p5.strokeWeight(1);
     p5.pixelDensity(1);
   };
   p5.draw = () => {
