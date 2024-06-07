@@ -8,7 +8,7 @@ const QR = () => {
 
   return (
     <div className='flex flex-col items-center'>
-      <h1 className='text-zinc-200'>What does your personality look like?</h1>
+      <h1 className='text-zinc-200 italic font-serif'>What does your personality look like?</h1>
       <QRCode value={url} size={200} className='mt-5'/>
     </div>
   );

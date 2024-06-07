@@ -7,7 +7,7 @@ import {
   Pixelify_Sans,
 } from "next/font/google";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 
 const unifraktur = UnifrakturMaguntia({ subsets: ["latin"], weight: ["400"], display: 'swap', adjustFontFallback: false });
 
@@ -31,7 +31,7 @@ export const fonts = [
   pixelify.className,
 ];
 
-export default function Title() {
+export default function Title({children}: {children: ReactNode}) {
   const [currentFontIndex, setCurrentFontIndex] = useState(0);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export default function Title() {
 
   return (
     <div className="flex flex-col items-center m-5 mb:mb-20 text-white text-6xl sm:text-8xl ">
-      <Link href='/'><p className={currentFont}>PsyCode</p></Link>
+      <Link href='/'><p className={currentFont}>{children}</p></Link>
     </div>
   );
 }

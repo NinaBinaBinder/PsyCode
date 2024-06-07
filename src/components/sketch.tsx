@@ -9,9 +9,8 @@ type MySketchProps = SketchProps & {
 
 export const sketch: Sketch<MySketchProps> = (p5) => {
   let values: FormAnswerType[] = [];
-  let size: number = 20;
+  let size: number = 200;
   let pulse: number = 0;
-  let random: number = 0;
 
   p5.updateWithProps = (props) => {
     if (props.values) {
@@ -34,7 +33,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
   };
   p5.draw = () => {
     p5.background(0);
-    p5.orbitControl(4, 4); // Mouse control
+    p5.orbitControl(4, 4);
     p5.rotateX(65);
     pulse += 0.01;
 

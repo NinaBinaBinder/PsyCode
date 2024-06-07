@@ -41,9 +41,9 @@ export default async function Latest() {
   });
 
   return (
-    <div className="h-full font-mono bg-black text-white">
-      <div className="flex md:flex-row flex-col md:justify-between md:place-items-end mb-5">
-        <Title />
+    <div className="-z-10 bg-black text-white">
+      <div className="flex md:flex-rowflex-col md:justify-between md:place-items-end mb-5">
+        <Title>PsyCode</Title>
         <Navbar currentPage={"latest"} />
       </div>
       <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center">

@@ -11,7 +11,7 @@ export default async function Personalities() {
   return (
     <div className="p-5 bg-black text-white">
       <div className="flex flex-row justify-between place-items-end mb-5">
-        <Title />
+      <Title>PsyCode</Title>
         <Navbar currentPage={"personalities"}/>
       </div>      <p>{allPeople.length}</p>
 
