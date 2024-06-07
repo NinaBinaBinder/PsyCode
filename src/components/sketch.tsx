@@ -121,8 +121,8 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
 
     drawIrregularShape(
       20,
-      70,
-      saturation5,
+      hue5,
+      100,
       100,
       abstract5,
       abstract5,
