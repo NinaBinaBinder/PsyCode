@@ -9,11 +9,9 @@ import { useEffect, useState } from "react";
 export default function P5Wrapper({
   sketch,
   answerValues,
-  size,
 }: {
   sketch: Sketch;
   answerValues: FormAnswerType[];
-  size: number;
 }) {
   const [sketchSize, setSketchSize] = useState(2000);
   const router = useRouter();
@@ -29,12 +27,13 @@ export default function P5Wrapper({
       }
     };
 
-    updateSketchSize(); // Update initially
-    window.addEventListener("resize", updateSketchSize); // Update on resize
+    updateSketchSize();
+    window.addEventListener("resize", updateSketchSize);
 
     const interval = setInterval(() => {
-      router.refresh;
-    }, 10000);
+      console.log('reload')
+      router.push;
+    }, 5000);
 
     return () => {
       clearInterval(interval);

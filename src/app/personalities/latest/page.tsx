@@ -47,11 +47,9 @@ export default async function Latest() {
         <Navbar currentPage={"latest"} />
       </div>
       <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center">
-        <p>this is</p>
-        <p className="font-bold text-4xl">{person[0].name}</p>
       </div>
       <div className="absolute justify-center">
-        <P5Wrapper sketch={sketch} answerValues={answerValues} size={2000} />
+        <P5Wrapper sketch={sketch} answerValues={answerValues}/>
       </div>
     </div>
   );

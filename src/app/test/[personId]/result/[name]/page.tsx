@@ -51,7 +51,7 @@ export default async function Result({
         <p className="font-bold text-6xl">{person[0].name}</p>
       </div>
       <div className="flex justify-center">
-        <P5Wrapper sketch={sketch} answerValues={answerValues} size={1500} />
+        <P5Wrapper sketch={sketch} answerValues={answerValues}/>
       </div>
     </div>
   );
