@@ -14,6 +14,7 @@ export default function P5Wrapper({
   answerValues: FormAnswerType[];
 }) {
   const [sketchSize, setSketchSize] = useState(2000);
+  const router = useRouter()
 
   useEffect(() => {
     const updateSketchSize = () => {
@@ -31,7 +32,8 @@ export default function P5Wrapper({
   
     const interval = setInterval(() => {
       console.log('Reloading page');
-      window.location.reload(); 
+      router.refresh()
+      //window.location.reload(); 
     }, 10000);
   
     return () => {

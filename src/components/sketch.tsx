@@ -9,7 +9,7 @@ type MySketchProps = SketchProps & {
 
 export const sketch: Sketch<MySketchProps> = (p5) => {
   let values: FormAnswerType[] = [];
-  let size: number = 2000;
+  let size: number = 200;
   let pulse: number = 0;
 
   p5.updateWithProps = (props) => {
@@ -23,7 +23,6 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
   };
 
   p5.setup = () => {
-    p5.frameRate(3)
     p5.createCanvas(200, 200, p5.WEBGL);
     p5.angleMode(p5.DEGREES);
     p5.colorMode(p5.HSB, 100, 100, 100, 100);
