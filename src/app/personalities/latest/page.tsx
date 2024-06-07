@@ -1,5 +1,3 @@
-"use server";
-
 import Navbar from "@/components/navbar";
 import P5Wrapper from "@/components/p5-wrapper";
 import { sketch } from "@/components/sketch";
@@ -12,6 +10,8 @@ export type FormAnswerType = {
   questionId: string;
   answerValue: number;
 };
+
+export const dynamic = "force-dynamic";
 
 export default async function Latest() {
   //get the last person check for updates every few seconds
@@ -46,10 +46,9 @@ export default async function Latest() {
         <Title>{person[0].name}</Title>
         <Navbar currentPage={"latest"} />
       </div>
-      <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center">
-      </div>
+      <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center"></div>
       <div className="absolute justify-center">
-        <P5Wrapper sketch={sketch} answerValues={answerValues}/>
+        <P5Wrapper sketch={sketch} answerValues={answerValues} />
       </div>
     </div>
   );

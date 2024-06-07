@@ -9,7 +9,7 @@ type MySketchProps = SketchProps & {
 
 export const sketch: Sketch<MySketchProps> = (p5) => {
   let values: FormAnswerType[] = [];
-  let size: number = 200;
+  let size: number = 2000;
   let pulse: number = 0;
 
   p5.updateWithProps = (props) => {
@@ -18,12 +18,12 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     }
     if (props.size) {
       size = props.size;
-      p5.resizeCanvas(size, size / 2);
+      p5.resizeCanvas(size, size);
     }
   };
 
   p5.setup = () => {
-    p5.createCanvas(200, 200, p5.WEBGL);
+    p5.createCanvas(size, size, p5.WEBGL);
     p5.angleMode(p5.DEGREES);
     p5.colorMode(p5.HSB, 100, 100, 100, 100);
     p5.noFill();
@@ -114,7 +114,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     let sumValues5 = values
       .slice(20, 25)
       .reduce((acc, val) => acc + val.answerValue, 0);
-    let hue5 = 20 + sumValues5 / 50 / 7;
+    let hue5 = 20 + sumValues5 / 50 + 7;
     let saturation5 = 30 + (sumValues5 / 500) * 70;
     let abstract5 = sumValues5 / 50;
 
