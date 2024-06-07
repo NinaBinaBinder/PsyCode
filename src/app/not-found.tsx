@@ -1,7 +1,6 @@
 "use client";
 
 import Title from "@/components/title";
-import Navbar from "@/components/navbar";
 import Link from "next/link";
 
 export default async function NotFound() {

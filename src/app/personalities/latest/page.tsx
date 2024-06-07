@@ -14,11 +14,13 @@ export type FormAnswerType = {
 };
 
 export default async function Latest() {
-  //get the last person check for updates every few seconds
+
   const person = await db
     .select()
     .from(personalities)
     .orderBy(desc(personalities.dateAdded));
+
+    console.log(person.length)
 
   const personAnswers = await db
     .selectDistinct()

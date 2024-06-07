@@ -32,8 +32,8 @@ export default function P5Wrapper({
   
     const interval = setInterval(() => {
       console.log('Reloading page');
-      router.refresh()
-      //window.location.reload(); 
+      //router.refresh()
+      window.location.reload(); 
     }, 10000);
   
     return () => {
