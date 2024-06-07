@@ -27,7 +27,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     p5.angleMode(p5.DEGREES);
     p5.colorMode(p5.HSB, 100, 100, 100, 100);
     p5.noFill();
-    p5.strokeWeight(1);
+    p5.strokeWeight(0.5);
     p5.pixelDensity(1);
   };
   p5.draw = () => {
@@ -114,7 +114,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     let sumValues5 = values
       .slice(20, 25)
       .reduce((acc, val) => acc + val.answerValue, 0);
-    let hue5 = 20 + sumValues5 / 50 / 7;
+    let hue5 = 20 + sumValues5 / 50 + 7;
     let saturation5 = 30 + (sumValues5 / 500) * 70;
     let abstract5 = sumValues5 / 50;
 
@@ -146,7 +146,6 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
       for (let phy = 0; phy < 360; phy += 2) {
         let noiseFactor = p5.noise(theta * 0.1 + pulse, phy * 0.1 + pulse); // Adding noise for irregularity with pulse
         let x =
-          pulse +
           r *
             (1 +
               bumpiness *

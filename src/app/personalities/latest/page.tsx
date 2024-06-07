@@ -1,4 +1,4 @@
-"use server";
+"use server"
 
 import Navbar from "@/components/navbar";
 import P5Wrapper from "@/components/p5-wrapper";
@@ -8,12 +8,15 @@ import { db } from "@/db/connection";
 import { answers, personalities, questions } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
 
+export const dynamic = 'force-dynamic'
+
 export type FormAnswerType = {
   questionId: string;
   answerValue: number;
 };
 
 export default async function Latest() {
+
 
   const person = await db
     .select()

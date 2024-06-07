@@ -5,7 +5,10 @@ import { db } from "@/db/connection";
 import { personalities } from "@/db/schema";
 import { desc } from "drizzle-orm";
 
+export const dynamic = 'force-dynamic'
+
 export default async function Personalities() {
+
   const allPeople = await db
     .select()
     .from(personalities)

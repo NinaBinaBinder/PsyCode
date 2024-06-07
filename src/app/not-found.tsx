@@ -3,7 +3,7 @@
 import Title from "@/components/title";
 import Link from "next/link";
 
-export default async function NotFound() {
+export default function NotFound() {
   return (
     <main className="flex min-h-screen flex-col items-center align-middle  p-24 text-white bg-black ">
       <div className="items-center align-middle">
