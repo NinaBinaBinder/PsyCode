@@ -27,7 +27,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     p5.angleMode(p5.DEGREES);
     p5.colorMode(p5.HSB, 100, 100, 100, 100);
     p5.noFill();
-    p5.strokeWeight(1);
+    p5.strokeWeight(0.5);
     p5.pixelDensity(1);
   };
   p5.draw = () => {
@@ -121,7 +121,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     drawIrregularShape(
       20,
       hue5,
-      saturation5,
+      100,
       100,
       abstract5,
       abstract5,
@@ -146,7 +146,6 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
       for (let phy = 0; phy < 360; phy += 2) {
         let noiseFactor = p5.noise(theta * 0.1 + pulse, phy * 0.1 + pulse); // Adding noise for irregularity with pulse
         let x =
-          pulse +
           r *
             (1 +
               bumpiness *

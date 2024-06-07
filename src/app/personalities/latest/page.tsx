@@ -6,6 +6,7 @@ import { db } from "@/db/connection";
 import { answers, personalities, questions } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
 
+
 export type FormAnswerType = {
   questionId: string;
   answerValue: number;
@@ -14,11 +15,14 @@ export type FormAnswerType = {
 export const dynamic = "force-dynamic";
 
 export default async function Latest() {
-  //get the last person check for updates every few seconds
+
+
   const person = await db
     .select()
     .from(personalities)
     .orderBy(desc(personalities.dateAdded));
+
+    console.log(person.length)
 
   const personAnswers = await db
     .selectDistinct()
