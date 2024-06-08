@@ -55,6 +55,7 @@ export default function Title({ children }: { children: ReactNode }) {
     <div className="flex flex-col items-center m-5 mb:mb-20 text-white text-6xl sm:text-8xl ">
       <Link href="/">
         <p className={currentFont}>{children}</p>
+        <p>@mininataurus</p>
       </Link>
     </div>
   );

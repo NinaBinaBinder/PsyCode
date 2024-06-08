@@ -4,26 +4,29 @@ import { Sketch, SketchProps } from "react-p5-wrapper";
 
 type MySketchProps = SketchProps & {
   values: FormAnswerType[];
-  size: number;
+  width: number;
+  height: number;
 };
 
 export const sketch: Sketch<MySketchProps> = (p5) => {
   let values: FormAnswerType[] = [];
-  let size: number = 2000;
+  let width: number = 200;
+  let height: number = 400;
   let pulse: number = 0;
 
   p5.updateWithProps = (props) => {
     if (props.values) {
       values = props.values;
     }
-    if (props.size) {
-      size = props.size;
-      p5.resizeCanvas(size, size);
+    if (props.width && props.height) {
+      width = props.width;
+      height = props.height;
+      p5.resizeCanvas(width, height);
     }
   };
 
   p5.setup = () => {
-    p5.createCanvas(size, size, p5.WEBGL);
+    p5.createCanvas(width, height, p5.WEBGL);
     p5.angleMode(p5.DEGREES);
     p5.colorMode(p5.HSB, 100, 100, 100, 100);
     p5.noFill();
@@ -43,7 +46,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     let saturation1 = 80 + sumValues1 / 25;
     let abstract1 = sumValues1 / 50;
     drawIrregularShape(
-      size / 4,
+      height / 4,
       hue1,
       saturation1,
       90,
@@ -64,7 +67,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     let abstract2 = sumValues2 / 50;
 
     drawIrregularShape(
-      size / 5,
+      width / 5,
       hue2,
       saturation2,
       90,
@@ -83,7 +86,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     let abstract3 = sumValues3 / 50;
 
     drawIrregularShape(
-      size / 7,
+      width / 7,
       hue3,
       100,
       brightness3,
@@ -101,7 +104,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     let abstract4 = sumValues4 / 50;
 
     drawIrregularShape(
-      size / 30,
+      width / 30,
       hue4,
       saturation4,
       100,
@@ -119,7 +122,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     let abstract5 = sumValues5 / 50;
 
     drawIrregularShape(
-      20,
+      width/ 50,
       hue5,
       100,
       100,
@@ -171,7 +174,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
               p5.sin(phyValue * phy) *
               noiseFactor) *
           p5.cos(theta);
-        p5.vertex(x, y, z);
+        p5.vertex(x, y, z); 
       }
     }
     p5.endShape();

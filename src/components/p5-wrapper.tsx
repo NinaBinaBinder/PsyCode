@@ -13,16 +13,18 @@ export default function P5Wrapper({
   sketch: Sketch;
   answerValues: FormAnswerType[];
 }) {
-  const [sketchSize, setSketchSize] = useState(2000);
-  const router = useRouter()
+  const [width, setWidth] = useState(200);
+  const [height, setHeight] = useState(200)
 
   useEffect(() => {
     const updateSketchSize = () => {
       if (window !== undefined) {
         if (window.innerWidth < 768) {
-          setSketchSize(500);
+          setWidth(200);
+          setHeight(400)
         } else {
-          setSketchSize(window.innerWidth);
+          setWidth(window.innerWidth);
+          setHeight(window.innerHeight)
         }
       }
     };
@@ -44,10 +46,10 @@ export default function P5Wrapper({
 
   return (
     <NextReactP5Wrapper
-      className={"h-[20vh]"}
       sketch={sketch}
       values={answerValues}
-      size={sketchSize}
+      width={width}
+      height = {height}
     />
   );
 }
