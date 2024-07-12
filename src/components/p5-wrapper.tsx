@@ -33,7 +33,6 @@ export default function P5Wrapper({
     window.addEventListener("resize", updateSketchSize);
   
     const interval = setInterval(() => {
-      console.log('Reloading page');
       window.location.reload(); 
     }, 10000);
   

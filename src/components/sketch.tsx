@@ -80,9 +80,9 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     let sumValues3 = values
       .slice(10, 14)
       .reduce((acc, val) => acc + val.answerValue, 0);
-    let hue3 = 20 + (sumValues3/ 50) * 5 ;
-    console.log(hue3)
-    let brightness3 = 100 - (0.06 * sumValues3);
+    let hue3 = 20 + (sumValues3 / 50) * 5;
+    console.log(hue3);
+    let brightness3 = 100 - 0.06 * sumValues3;
     let abstract3 = sumValues3 / 50;
 
     drawIrregularShape(
@@ -90,7 +90,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
       hue3,
       100,
       brightness3,
-      abstract3 ,
+      abstract3,
       abstract3,
       abstract3,
       pulse
@@ -122,7 +122,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
     let abstract5 = sumValues5 / 50;
 
     drawIrregularShape(
-      width/ 50,
+      width / 50,
       hue5,
       100,
       100,
@@ -150,13 +150,13 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
         let noiseFactor = p5.noise(theta * 0.1 + pulse, phy * 0.1 + pulse); // Adding noise for irregularity with pulse
         let x =
           r *
-            (1 +
-              bumpiness *
-                p5.sin(thetaValue * theta) *
-                p5.sin(phyValue * phy) *
-                noiseFactor) *
-            p5.sin(theta) *
-            p5.cos(phy);
+          (1 +
+            bumpiness *
+              p5.sin(thetaValue * theta) *
+              p5.sin(phyValue * phy) *
+              noiseFactor) *
+          p5.sin(theta) *
+          p5.cos(phy);
         let y =
           r *
           (1 +
@@ -174,7 +174,7 @@ export const sketch: Sketch<MySketchProps> = (p5) => {
               p5.sin(phyValue * phy) *
               noiseFactor) *
           p5.cos(theta);
-        p5.vertex(x, y, z); 
+        p5.vertex(x, y, z);
       }
     }
     p5.endShape();
